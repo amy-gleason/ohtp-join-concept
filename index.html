@@ -179,9 +179,10 @@ a:hover{text-decoration-thickness:2px;color:var(--cms-color-ink)}
 .cms-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--cms-spacing-2) var(--cms-spacing-3)}
 .cms-hero__note{font-size:var(--cms-type-2xs);color:var(--cms-color-base);margin:0}
 .cms-hero .cms-photo{aspect-ratio:4/3}
+.cms-hero__img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--cms-radius-md)}
 @media (min-width:64em){
   .cms-hero{padding:var(--cms-spacing-12) 0 var(--cms-spacing-10)}
-  .cms-hero__grid{grid-template-columns:7fr 5fr;gap:var(--cms-spacing-10)}
+  .cms-hero__grid{grid-template-columns:1fr 1fr;gap:var(--cms-spacing-10)}
   .cms-hero .cms-photo{aspect-ratio:4/5}
 }
 
@@ -364,9 +365,7 @@ a:hover{text-decoration-thickness:2px;color:var(--cms-color-ink)}
           <p class="cms-hero__note">Opens the application form on Qualtrics</p>
         </div>
       </div>
-      <div class="cms-photo" role="img" aria-label="Photo placeholder">
-        <span class="cms-photo__label"><strong>PHOTO PLACEHOLDER</strong><br>Real CMS team members at work. Final image and alt text need OC approval.</span>
-      </div>
+      <img class="cms-hero__img" src="assets/ohtp-team.jpg" width="1600" height="1200" alt="Members of the Office of Health Technology and Products team standing with CMS Administrator Dr. Mehmet Oz in his office.">
     </div>
   </section>
 
