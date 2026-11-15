@@ -231,6 +231,7 @@ a:hover{text-decoration-thickness:2px;color:var(--cms-color-ink)}
 /* ---- cms-stat (pay) ---- */
 .cms-stat{display:grid;gap:var(--cms-spacing-4);align-items:end}
 .cms-stat__number{font-family:var(--cms-font-heading);font-size:clamp(3.5rem,2rem + 7vw,8.5rem);line-height:.95;font-weight:600;color:var(--cms-color-primary);letter-spacing:-.03em;margin:0}
+.cms-stat__prefix{display:block;font-size:var(--cms-type-lg);letter-spacing:0;line-height:1.2;margin-bottom:.25em;color:var(--cms-color-ink)}
 .cms-stat__label{font-size:var(--cms-type-md);margin:0 0 var(--cms-spacing-2)}
 @media (min-width:64em){.cms-stat{grid-template-columns:auto 1fr;gap:var(--cms-spacing-8)}}
 
@@ -464,7 +465,7 @@ a:hover{text-decoration-thickness:2px;color:var(--cms-color-ink)}
         <h2 id="pay-title">Pay</h2>
       </div>
       <div class="cms-stat cms-reveal">
-        <p class="cms-stat__number">$197,200</p>
+        <p class="cms-stat__number"><span class="cms-stat__prefix">Pays up to</span> $197,200</p>
         <div>
           <p class="cms-stat__label">The top of the General Schedule pay scale in 2026.</p>
           <p>Federal pay depends on a role’s grade, your experience, and where you work, and it can change from year to year.</p>
