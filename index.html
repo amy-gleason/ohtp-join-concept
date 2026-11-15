@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join the Office of Health Technology and Products | CMS</title>
+<meta name="description" content="Work on technology that supports Medicare, Medicaid, CHIP, and the Health Insurance Marketplace®. Send your information to the CMS talent team.">
+<!--
+==========================================================================
+ OHTP JOIN PAGE — CMS-BRANDED CONCEPT (design mockup, not production)
+ Prepared Nov 14, 2026 for CMS Office of Communications (OC) review.
+
+ BRAND SOURCES
+  - CMS Brand Strategy & Graphic Standards Guide, Sept 2026 (pp. 4-15)
+  - cms.gov "cms_evo" Drupal theme chrome (header, footer, Lexend + Public Sans)
+  - USWDS 3 patterns (banner, process list, summary box, card, button)
+
+ OFFICIAL ASSETS (unaltered, never redrawn)
+  - assets/cmsgov-logo.svg   CMS.gov web logo, copied from cms.gov /themes/custom/cms_evo/logo.svg
+  - assets/hhs-logo.png      HHS logo, copied from cms.gov /themes/custom/cms_evo/images/hhslogo.png
+  - assets/us_flag_small.png, icon-dot-gov.svg, icon-https.svg  from @uswds/uswds 3.13.0 dist/img
+  No OHTP symbol, wordmark, or favicon. The office name is set as plain text only.
+
+ TOKENS (CSS custom properties; names mirror USWDS theme tokens)
+  Color   --cms-color-primary #015390 (CMS Blue)      --cms-color-accent-warm #f3ce3b (CMS Gold)
+          --cms-color-accent-cool #009ad0 (CMS Bright Blue, non-text accents only)
+          --cms-color-ink #1b1b1b  --cms-color-base #4a4f55  --cms-color-base-lightest #f2f4f7
+          --cms-color-base-lighter #d4d9df  --cms-color-white #ffffff
+  Type    --cms-font-heading Lexend   --cms-font-body Public Sans
+          scale --cms-type-2xs … --cms-type-display (USWDS-style size tokens)
+  Space   --cms-spacing-1 … --cms-spacing-15 (USWDS 8px grid: units 1=8px … 15=120px)
+  Other   --cms-radius-md, --cms-focus-* , --cms-measure, --cms-logo-clearspace
+
+ COMPONENTS -> suggested Drupal mapping
+  usa-banner ................ cms_evo region: header (global, not editable)
+  cms-header ................ cms_evo region: header (global)
+  cms-localnav .............. Block: "In-page navigation" (menu of anchors + CTA)
+  cms-hero .................. Paragraph type: hero (eyebrow, H1, lede, CTA, image)
+  cms-program-strip ......... Paragraph type: inline list (taxonomy: CMS programs)
+  cms-intro ................. Paragraph type: text + list
+  usa-process-list .......... Paragraph type: process steps (repeatable step)
+  usa-summary-box ........... Paragraph type: summary box
+  cms-checklist ............. Paragraph type: numbered requirements
+  cms-stat .................. Paragraph type: stat (number, label, link)
+  usa-card-group/usa-card ... Paragraph type: card group (repeatable card)
+  cms-stat-band ............. Paragraph type: stat band (repeatable stat)
+  cms-cta ................... Paragraph type: call to action
+  cms-footer ................ cms_evo region: footer (global)
+ Motion: one IntersectionObserver reveal + hero rule draw; off under prefers-reduced-motion
+ and when JS is unavailable (content is visible by default).
+ PHOTOGRAPHY: placeholders only, clearly labeled. Real CMS staff photos need OC approval.
+==========================================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- color (CMS Brand Guide p.15 + neutrals) ---- */
+  --cms-color-primary:#015390;          /* CMS Blue */
+  --cms-color-accent-warm:#f3ce3b;      /* CMS Gold: backgrounds w/ ink text, large text on blue, rules */
+  --cms-color-accent-cool:#009ad0;      /* CMS Bright Blue: non-text accents only (3.21:1 on white) */
+  --cms-color-ink:#1b1b1b;
+  --cms-color-base:#4a4f55;
+  --cms-color-base-lighter:#d4d9df;
+  --cms-color-base-lightest:#f2f4f7;
+  --cms-color-white:#ffffff;
+  /* ---- type ---- */
+  --cms-font-heading:"Lexend","Public Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --cms-font-body:"Public Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --cms-type-2xs:.875rem; --cms-type-xs:1rem; --cms-type-sm:1.0625rem; --cms-type-md:1.25rem;
+  --cms-type-lg:clamp(1.375rem,1.1rem + 1vw,1.75rem);
+  --cms-type-xl:clamp(1.75rem,1.3rem + 1.8vw,2.5rem);
+  --cms-type-2xl:clamp(2.25rem,1.5rem + 3vw,3.75rem);
+  --cms-type-display:clamp(2.5rem,1.4rem + 4.6vw,5.25rem);
+  --cms-lh-heading:1.1; --cms-lh-body:1.6; --cms-measure:68ch;
+  /* ---- spacing: USWDS 8px units ---- */
+  --cms-spacing-05:4px; --cms-spacing-1:8px; --cms-spacing-2:16px; --cms-spacing-3:24px;
+  --cms-spacing-4:32px; --cms-spacing-5:40px; --cms-spacing-6:48px; --cms-spacing-8:64px;
+  --cms-spacing-10:80px; --cms-spacing-12:96px; --cms-spacing-15:120px;
+  --cms-section-pad:var(--cms-spacing-8);
+  --cms-gutter:var(--cms-spacing-3);
+  --cms-container:1200px;
+  --cms-radius-md:4px;
+  --cms-focus-width:3px; --cms-focus-offset:2px;
+  --cms-focus-color:var(--cms-color-primary);
+  /* CMS.gov logo: clear space = height of "C" (~70% of logo height) — guide p.8 */
+  --cms-logo-width:160px; --cms-logo-clearspace:var(--cms-spacing-4);
+}
+@media (min-width:64em){
+  :root{--cms-section-pad:var(--cms-spacing-15);--cms-gutter:var(--cms-spacing-5);--cms-logo-width:180px;}
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;font-family:var(--cms-font-body);font-size:var(--cms-type-sm);line-height:var(--cms-lh-body);color:var(--cms-color-ink);background:var(--cms-color-white)}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{font-family:var(--cms-font-heading);line-height:var(--cms-lh-heading);margin:0;font-weight:600;letter-spacing:-.01em}
+p{margin:0 0 var(--cms-spacing-2);max-width:var(--cms-measure)}
+a{color:var(--cms-color-primary);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px;color:var(--cms-color-ink)}
+:focus-visible{outline:var(--cms-focus-width) solid var(--cms-focus-color);outline-offset:var(--cms-focus-offset)}
+.is-dark :focus-visible{--cms-focus-color:var(--cms-color-accent-warm)}
+.usa-sr-only{position:absolute;left:-999em;width:1px;height:1px;overflow:hidden}
+.grid-container{max-width:var(--cms-container);margin:0 auto;padding:0 var(--cms-gutter)}
+
+/* ---- skip link ---- */
+.usa-skipnav{position:absolute;left:var(--cms-spacing-1);top:-100px;z-index:100;background:var(--cms-color-white);color:var(--cms-color-primary);padding:var(--cms-spacing-1) var(--cms-spacing-2);font-weight:700}
+.usa-skipnav:focus{top:var(--cms-spacing-1)}
+
+/* ---- usa-banner ---- */
+.usa-banner{background:var(--cms-color-base-lightest);font-size:.8125rem;line-height:1.4}
+.usa-banner__header{display:flex;align-items:center;gap:var(--cms-spacing-1);flex-wrap:wrap;min-height:32px;padding:var(--cms-spacing-05) 0}
+.usa-banner__header img{width:16px;height:11px}
+.usa-banner details summary{list-style:none;cursor:pointer;color:var(--cms-color-primary);text-decoration:underline;display:inline-flex;align-items:center;min-height:24px;gap:4px}
+.usa-banner details summary::-webkit-details-marker{display:none}
+.usa-banner details summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:4px}
+.usa-banner details[open] summary::after{transform:rotate(-135deg)}
+.usa-banner__content{display:grid;gap:var(--cms-spacing-3);padding:var(--cms-spacing-2) 0 var(--cms-spacing-3);font-size:.9375rem}
+.usa-banner__guidance{display:flex;gap:var(--cms-spacing-2);align-items:flex-start}
+.usa-banner__guidance img{width:40px;height:40px;flex:none}
+.usa-banner__guidance p{margin:0}
+@media (min-width:40em){.usa-banner__content{grid-template-columns:1fr 1fr}}
+
+/* ---- cms-header (cms.gov chrome) ---- */
+.cms-header{border-bottom:1px solid var(--cms-color-base-lighter)}
+.cms-header__inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 var(--cms-spacing-4)}
+.cms-header__brand{display:flex;align-items:center;gap:var(--cms-logo-clearspace);padding:var(--cms-logo-clearspace) 0;text-decoration:none;color:var(--cms-color-ink)}
+.cms-header__logo{width:var(--cms-logo-width);min-width:120px;height:auto}
+.cms-header__tagline{display:none;font-family:var(--cms-font-heading);font-size:var(--cms-type-xs);font-weight:500;color:var(--cms-color-ink)}
+@media (min-width:48em){.cms-header__tagline{display:block}}
+.cms-header__utility{display:flex;gap:var(--cms-spacing-3);list-style:none;margin:0 0 var(--cms-spacing-2);padding:0;font-size:var(--cms-type-2xs)}
+@media (min-width:48em){.cms-header__utility{margin:0}}
+.cms-header__utility a{color:var(--cms-color-ink);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.cms-header__utility a:hover{text-decoration:underline}
+
+/* ---- cms-localnav (in-page nav) ---- */
+.cms-localnav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.97);border-bottom:1px solid var(--cms-color-base-lighter)}
+.cms-localnav__inner{display:flex;align-items:center;gap:var(--cms-spacing-2);min-height:64px}
+.cms-localnav__title{font-family:var(--cms-font-heading);font-weight:600;font-size:var(--cms-type-2xs);color:var(--cms-color-primary);margin-right:auto;line-height:1.25}
+.cms-localnav__links{display:none;list-style:none;margin:0;padding:0;gap:var(--cms-spacing-3)}
+.cms-localnav__links a{color:var(--cms-color-ink);text-decoration:none;font-size:var(--cms-type-2xs);display:inline-flex;min-height:44px;align-items:center;border-bottom:3px solid transparent}
+.cms-localnav__links a:hover,.cms-localnav__links a[aria-current="true"]{border-bottom-color:var(--cms-color-accent-cool)}
+@media (min-width:64em){.cms-localnav__links{display:flex}.cms-localnav__title{font-size:var(--cms-type-xs)}}
+
+/* ---- usa-button ---- */
+.usa-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--cms-spacing-1);min-height:44px;padding:var(--cms-spacing-1) var(--cms-spacing-3);border-radius:var(--cms-radius-md);font-family:var(--cms-font-body);font-weight:700;font-size:var(--cms-type-xs);line-height:1.2;text-decoration:none;background:var(--cms-color-primary);color:var(--cms-color-white);border:2px solid var(--cms-color-primary);transition:background-color .15s,color .15s}
+.usa-button:hover{background:var(--cms-color-ink);border-color:var(--cms-color-ink);color:var(--cms-color-white)}
+.usa-button--big{min-height:56px;padding:var(--cms-spacing-2) var(--cms-spacing-4);font-size:var(--cms-type-md)}
+.usa-button--accent-warm{background:var(--cms-color-accent-warm);border-color:var(--cms-color-accent-warm);color:var(--cms-color-ink)}
+.usa-button--accent-warm:hover{background:var(--cms-color-white);border-color:var(--cms-color-white);color:var(--cms-color-ink)}
+.usa-button--sm{min-height:40px;padding:var(--cms-spacing-1) var(--cms-spacing-2);font-size:var(--cms-type-2xs);white-space:nowrap}
+.usa-button__icon{width:1em;height:1em}
+
+/* ---- shared section scaffolding ---- */
+.cms-section{padding:var(--cms-section-pad) 0;scroll-margin-top:64px}
+.cms-section--tint{background:var(--cms-color-base-lightest)}
+.cms-section__head{margin-bottom:var(--cms-spacing-6);max-width:52rem}
+.cms-section__head h2{font-size:var(--cms-type-2xl);color:var(--cms-color-primary)}
+.cms-section__head p{font-size:var(--cms-type-md);color:var(--cms-color-base);margin-top:var(--cms-spacing-2)}
+.cms-kicker{display:flex;align-items:center;gap:var(--cms-spacing-2);font-family:var(--cms-font-heading);font-size:var(--cms-type-2xs);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--cms-color-base);margin-bottom:var(--cms-spacing-2)}
+.cms-kicker::before{content:"";width:var(--cms-spacing-5);height:4px;background:var(--cms-color-accent-warm);flex:none}
+.is-dark .cms-kicker{color:var(--cms-color-white)}
+
+/* ---- photo placeholder (replace with approved photography) ---- */
+.cms-photo{position:relative;border-radius:var(--cms-radius-md);overflow:hidden;background:
+  linear-gradient(160deg,rgba(1,83,144,.12),rgba(1,83,144,.32)),
+  repeating-linear-gradient(135deg,var(--cms-color-base-lightest) 0 14px,#e6eaef 14px 28px);
+  aspect-ratio:4/5;display:flex;align-items:flex-end}
+.cms-photo__label{margin:var(--cms-spacing-2);background:var(--cms-color-white);color:var(--cms-color-ink);font-size:.8125rem;line-height:1.35;padding:var(--cms-spacing-1) var(--cms-spacing-2);border-left:4px solid var(--cms-color-accent-cool);max-width:30ch}
+.cms-photo--wide{aspect-ratio:16/7}
+
+/* ---- cms-hero ---- */
+.cms-hero{padding:var(--cms-spacing-8) 0 var(--cms-spacing-6)}
+.cms-hero__grid{display:grid;gap:var(--cms-spacing-6);align-items:center}
+.cms-hero h1{font-size:var(--cms-type-display);color:var(--cms-color-primary);font-weight:600;letter-spacing:-.025em;line-height:1.02}
+.cms-hero h1 .cms-hero__rule{display:block;width:var(--cms-spacing-12);height:8px;background:var(--cms-color-accent-warm);margin-top:var(--cms-spacing-3);transform-origin:left}
+.cms-hero__lede{font-size:var(--cms-type-lg);line-height:1.45;color:var(--cms-color-ink);margin:var(--cms-spacing-4) 0 var(--cms-spacing-4);max-width:36ch}
+.cms-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--cms-spacing-2) var(--cms-spacing-3)}
+.cms-hero__note{font-size:var(--cms-type-2xs);color:var(--cms-color-base);margin:0}
+.cms-hero .cms-photo{aspect-ratio:4/3}
+@media (min-width:64em){
+  .cms-hero{padding:var(--cms-spacing-12) 0 var(--cms-spacing-10)}
+  .cms-hero__grid{grid-template-columns:7fr 5fr;gap:var(--cms-spacing-10)}
+  .cms-hero .cms-photo{aspect-ratio:4/5}
+}
+
+/* ---- cms-program-strip ---- */
+.cms-program-strip{background:var(--cms-color-primary);color:var(--cms-color-white);padding:var(--cms-spacing-4) 0}
+.cms-program-strip__inner{display:grid;gap:var(--cms-spacing-2)}
+.cms-program-strip p{margin:0;font-size:var(--cms-type-2xs);text-transform:uppercase;letter-spacing:.06em;font-family:var(--cms-font-heading);font-weight:500}
+.cms-program-strip ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--cms-spacing-1) var(--cms-spacing-4);font-family:var(--cms-font-heading);font-size:var(--cms-type-lg);font-weight:500}
+.cms-program-strip li{display:flex;align-items:center;gap:var(--cms-spacing-2)}
+.cms-program-strip li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cms-color-accent-warm)}
+@media (min-width:64em){.cms-program-strip__inner{grid-template-columns:auto 1fr;align-items:center;gap:var(--cms-spacing-6)}}
+
+/* ---- cms-intro ---- */
+.cms-intro__grid{display:grid;gap:var(--cms-spacing-6)}
+.cms-intro__statement{font-family:var(--cms-font-heading);font-size:var(--cms-type-xl);line-height:1.25;font-weight:500;color:var(--cms-color-ink);max-width:24ch}
+.cms-intro__body p{font-size:var(--cms-type-md)}
+.cms-tags{list-style:none;padding:0;margin:var(--cms-spacing-3) 0 0;display:flex;flex-wrap:wrap;gap:var(--cms-spacing-1)}
+.cms-tags li{border:1px solid var(--cms-color-primary);color:var(--cms-color-primary);border-radius:999px;padding:var(--cms-spacing-05) var(--cms-spacing-2);font-size:var(--cms-type-2xs);font-weight:600}
+@media (min-width:64em){.cms-intro__grid{grid-template-columns:5fr 6fr;gap:var(--cms-spacing-12)}}
+
+/* ---- usa-process-list ---- */
+.usa-process-list{list-style:none;margin:0;padding:0;counter-reset:step;display:grid;gap:var(--cms-spacing-5)}
+.usa-process-list__item{counter-increment:step;position:relative;padding-top:var(--cms-spacing-3);border-top:4px solid var(--cms-color-primary)}
+.usa-process-list__item::before{content:"0" counter(step);display:block;font-family:var(--cms-font-heading);font-size:var(--cms-type-2xl);font-weight:600;color:var(--cms-color-primary);line-height:1;margin-bottom:var(--cms-spacing-2)}
+.usa-process-list__heading{font-size:var(--cms-type-lg);margin-bottom:var(--cms-spacing-1)}
+.usa-process-list__item p{margin:0;color:var(--cms-color-base)}
+@media (min-width:48em){.usa-process-list{grid-template-columns:repeat(3,1fr)}}
+.cms-process-notes{display:grid;gap:var(--cms-spacing-3);margin-top:var(--cms-spacing-6)}
+.cms-process-notes p{margin:0;padding-left:var(--cms-spacing-2);border-left:4px solid var(--cms-color-accent-cool);color:var(--cms-color-ink)}
+@media (min-width:48em){.cms-process-notes{grid-template-columns:1fr 1fr;gap:var(--cms-spacing-5)}}
+
+/* ---- usa-summary-box ---- */
+.usa-summary-box{background:var(--cms-color-white);border-left:8px solid var(--cms-color-accent-warm);padding:var(--cms-spacing-4);border-radius:var(--cms-radius-md);box-shadow:0 1px 0 var(--cms-color-base-lighter)}
+.usa-summary-box__heading{font-size:var(--cms-type-md);margin-bottom:var(--cms-spacing-2)}
+.usa-summary-box ul{margin:0;padding-left:1.25em}
+.usa-summary-box li{margin-bottom:var(--cms-spacing-1)}
+.cms-split{display:grid;gap:var(--cms-spacing-5)}
+@media (min-width:64em){.cms-split{grid-template-columns:1fr 1fr;gap:var(--cms-spacing-10);align-items:start}}
+.cms-split__text p{font-size:var(--cms-type-md)}
+
+/* ---- cms-checklist (requirements) ---- */
+.cms-checklist{list-style:none;padding:0;margin:0;display:grid;gap:var(--cms-spacing-2)}
+.cms-checklist li{display:grid;grid-template-columns:auto 1fr;gap:var(--cms-spacing-3);align-items:start;padding:var(--cms-spacing-3);background:var(--cms-color-white);border:1px solid var(--cms-color-base-lighter);border-radius:var(--cms-radius-md);font-size:var(--cms-type-md);line-height:1.4}
+.cms-checklist svg{width:32px;height:32px;flex:none}
+@media (min-width:48em){.cms-checklist{grid-template-columns:repeat(3,1fr)}.cms-checklist li{grid-template-columns:1fr;gap:var(--cms-spacing-2)}}
+
+/* ---- cms-stat (pay) ---- */
+.cms-stat{display:grid;gap:var(--cms-spacing-4);align-items:end}
+.cms-stat__number{font-family:var(--cms-font-heading);font-size:clamp(3.5rem,2rem + 7vw,8.5rem);line-height:.95;font-weight:600;color:var(--cms-color-primary);letter-spacing:-.03em;margin:0}
+.cms-stat__label{font-size:var(--cms-type-md);margin:0 0 var(--cms-spacing-2)}
+@media (min-width:64em){.cms-stat{grid-template-columns:auto 1fr;gap:var(--cms-spacing-8)}}
+
+/* ---- usa-card ---- */
+.usa-card-group{list-style:none;margin:0;padding:0;display:grid;gap:var(--cms-spacing-3)}
+@media (min-width:40em){.usa-card-group{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:64em){.usa-card-group{grid-template-columns:repeat(4,1fr)}}
+.usa-card__container{height:100%;display:flex;flex-direction:column;background:var(--cms-color-white);border:1px solid var(--cms-color-base-lighter);border-top:4px solid var(--cms-color-primary);border-radius:var(--cms-radius-md);padding:var(--cms-spacing-3);transition:transform .2s ease,box-shadow .2s ease}
+.usa-card__container:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,27,27,.08)}
+.usa-card__heading{font-size:var(--cms-type-md);margin-bottom:var(--cms-spacing-1)}
+.usa-card__body{flex:1}
+.usa-card__body p{margin:0;font-size:var(--cms-type-xs);color:var(--cms-color-base)}
+.usa-card__footer{margin-top:var(--cms-spacing-2);font-size:var(--cms-type-2xs);font-weight:700}
+.usa-card__footer a{display:inline-flex;min-height:24px;align-items:center}
+
+/* ---- cms-stat-band (time off) ---- */
+.cms-stat-band{background:var(--cms-color-primary);color:var(--cms-color-white)}
+.cms-stat-band .cms-section__head h2{color:var(--cms-color-white)}
+.cms-stat-band__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:var(--cms-spacing-5) var(--cms-spacing-3)}
+@media (min-width:64em){.cms-stat-band__list{grid-template-columns:repeat(4,1fr)}}
+.cms-stat-band__list li{border-top:1px solid rgba(255,255,255,.5);padding-top:var(--cms-spacing-2)}
+.cms-stat-band__num{display:block;white-space:nowrap;font-family:var(--cms-font-heading);font-size:clamp(1.75rem,1.2rem + 2.4vw,3.25rem);font-weight:600;color:var(--cms-color-accent-warm);line-height:1.05}
+.cms-stat-band__label{display:block;margin-top:var(--cms-spacing-1);font-size:var(--cms-type-xs)}
+.cms-stat-band a{color:var(--cms-color-white)}
+.cms-stat-band a:hover{color:var(--cms-color-accent-warm)}
+.cms-stat-band__more{margin-top:var(--cms-spacing-6)}
+
+/* ---- cms-cta ---- */
+.cms-cta__inner{display:grid;gap:var(--cms-spacing-4);align-items:center}
+.cms-cta h2{font-size:var(--cms-type-2xl);color:var(--cms-color-primary);max-width:18ch;margin-bottom:var(--cms-spacing-3)}
+.cms-cta p{font-size:var(--cms-type-md)}
+@media (min-width:64em){.cms-cta__inner{grid-template-columns:1fr auto;gap:var(--cms-spacing-10)}}
+.cms-fineprint{margin-top:var(--cms-spacing-8);padding-top:var(--cms-spacing-3);border-top:1px solid var(--cms-color-base-lighter);display:grid;gap:var(--cms-spacing-2);font-size:var(--cms-type-2xs);color:var(--cms-color-base)}
+.cms-fineprint p{max-width:none;margin:0}
+@media (min-width:64em){.cms-fineprint{grid-template-columns:2fr 1fr;gap:var(--cms-spacing-6)}}
+
+/* ---- cms-footer (cms.gov pattern) ---- */
+.cms-footer{background:var(--cms-color-primary);color:var(--cms-color-white);font-size:var(--cms-type-2xs)}
+.cms-footer a{color:var(--cms-color-white)}
+.cms-footer a:hover{color:var(--cms-color-accent-warm)}
+.cms-footer__nav{display:grid;gap:var(--cms-spacing-4);padding:var(--cms-spacing-8) 0 var(--cms-spacing-5);grid-template-columns:1fr 1fr}
+@media (min-width:64em){.cms-footer__nav{grid-template-columns:repeat(5,1fr)}}
+.cms-footer h2{font-family:var(--cms-font-heading);font-size:var(--cms-type-xs);font-weight:600;margin-bottom:var(--cms-spacing-2)}
+.cms-footer ul{list-style:none;margin:0;padding:0}
+.cms-footer li a{display:inline-flex;min-height:32px;align-items:center}
+.cms-footer__identity{border-top:1px solid rgba(255,255,255,.35);padding:var(--cms-spacing-4) 0 var(--cms-spacing-6);display:flex;flex-wrap:wrap;gap:var(--cms-spacing-3);align-items:center}
+.cms-footer__hhs{background:var(--cms-color-white);padding:var(--cms-spacing-1);border-radius:var(--cms-radius-md);line-height:0}
+.cms-footer__identity p{margin:0}
+.cms-footer__social{list-style:none;display:flex;flex-wrap:wrap;gap:var(--cms-spacing-1) var(--cms-spacing-3);margin:0;padding:0}
+@media (min-width:64em){.cms-footer__social{margin-left:auto}}
+.cms-footer__social a{display:inline-flex;min-height:44px;align-items:center;font-weight:700}
+
+/* ---- motion (progressive enhancement) ---- */
+@media (prefers-reduced-motion:no-preference){
+  .js .cms-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .cms-reveal.is-visible{opacity:1;transform:none}
+  .js .cms-hero__rule{animation:cms-draw .9s .3s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes cms-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+}
+@media (prefers-reduced-motion:reduce){.usa-card__container{transition:none}.usa-card__container:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+<!-- ===== usa-banner (USWDS official banner) ===== -->
+<section class="usa-banner" aria-label="Official website of the United States government">
+  <div class="grid-container">
+    <details>
+      <summary class="usa-banner__header">
+        <img src="assets/us_flag_small.png" alt="" width="16" height="11">
+        <span>An official website of the United States government</span>
+        <span>Here’s how you know</span>
+      </summary>
+      <div class="usa-banner__content">
+        <div class="usa-banner__guidance">
+          <img src="assets/icon-dot-gov.svg" alt="" width="40" height="40">
+          <p><strong>Official websites use .gov</strong><br>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+        </div>
+        <div class="usa-banner__guidance">
+          <img src="assets/icon-https.svg" alt="" width="40" height="40">
+          <p><strong>Secure .gov websites use HTTPS</strong><br>A <strong>lock</strong> or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== cms-header (cms.gov cms_evo chrome) ===== -->
+<header class="cms-header">
+  <div class="grid-container cms-header__inner">
+    <a class="cms-header__brand" href="https://www.cms.gov">
+      <img class="cms-header__logo" src="assets/cmsgov-logo.svg" alt="CMS.gov" width="180" height="43">
+      <span class="cms-header__tagline">Centers for Medicare &amp; Medicaid Services</span>
+    </a>
+    <nav aria-label="CMS global">
+      <ul class="cms-header__utility">
+        <li><a href="https://www.cms.gov/about-cms">About CMS</a></li>
+        <li><a href="https://www.cms.gov/newsroom">Newsroom</a></li>
+        <li><a href="https://www.cms.gov/data-research">Data &amp; Research</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== cms-localnav (office name as TEXT only — no OHTP mark) ===== -->
+<nav class="cms-localnav" aria-label="On this page">
+  <div class="grid-container cms-localnav__inner">
+    <p class="cms-localnav__title" style="margin-bottom:0">Office of Health Technology and Products</p>
+    <ul class="cms-localnav__links">
+      <li><a href="#what-to-expect">What to expect</a></li>
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#pay">Pay and benefits</a></li>
+    </ul>
+    <a class="usa-button usa-button--sm" href="https://www.cms.gov/ohtp-join-form?source=join-nav">Apply<span class="usa-sr-only"> (opens the application form on Qualtrics)</span></a>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+
+  <!-- ===== cms-hero ===== -->
+  <section class="cms-hero" aria-labelledby="hero-title">
+    <div class="grid-container cms-hero__grid">
+      <div>
+        <p class="cms-kicker">Careers at CMS</p>
+        <h1 id="hero-title">Join the Office of Health Technology and Products<span class="cms-hero__rule" aria-hidden="true"></span></h1>
+        <p class="cms-hero__lede">We’re bringing experienced technologists into CMS to work on some of the hardest problems in health care.</p>
+        <div class="cms-hero__actions">
+          <a class="usa-button usa-button--big" href="https://www.cms.gov/ohtp-join-form?source=join-hero">Send us your information</a>
+          <p class="cms-hero__note">Opens the application form on Qualtrics</p>
+        </div>
+      </div>
+      <div class="cms-photo" role="img" aria-label="Photo placeholder">
+        <span class="cms-photo__label"><strong>PHOTO PLACEHOLDER</strong><br>Real CMS team members at work. Final image and alt text need OC approval.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== cms-program-strip ===== -->
+  <section class="cms-program-strip is-dark" aria-label="Programs this work supports">
+    <div class="grid-container cms-program-strip__inner">
+      <p>The work supports</p>
+      <ul>
+        <li>Medicare</li><li>Medicaid</li><li>CHIP</li><li>Health Insurance Marketplace®</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== cms-intro ===== -->
+  <section class="cms-section" aria-labelledby="intro-title">
+    <div class="grid-container cms-intro__grid cms-reveal">
+      <h2 id="intro-title" class="cms-intro__statement">Your work helps older adults, people with disabilities, low-income families, and children.</h2>
+      <div class="cms-intro__body">
+        <p>Send us your information and our talent team will look for the best fit across CMS. That could be a role on our core team, or a role inside another part of CMS working on its own digital services.</p>
+        <p>Our people come from:</p>
+        <ul class="cms-tags">
+          <li>Engineering</li><li>Product</li><li>Design</li><li>Procurement</li><li>And more</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== usa-process-list ===== -->
+  <section class="cms-section cms-section--tint" id="what-to-expect" aria-labelledby="expect-title">
+    <div class="grid-container">
+      <div class="cms-section__head cms-reveal">
+        <p class="cms-kicker">What to expect</p>
+        <h2 id="expect-title">Three steps. We’ll guide you through each one.</h2>
+      </div>
+      <ol class="usa-process-list cms-reveal">
+        <li class="usa-process-list__item">
+          <h3 class="usa-process-list__heading">Apply</h3>
+          <p>Send us your information and your resume through the form. Designers, add a link to your portfolio.</p>
+        </li>
+        <li class="usa-process-list__item">
+          <h3 class="usa-process-list__heading">Get qualified</h3>
+          <p>Our talent team reviews your background against the qualifications for open and upcoming roles across CMS.</p>
+        </li>
+        <li class="usa-process-list__item">
+          <h3 class="usa-process-list__heading">Interview</h3>
+          <p>If there’s a fit, you’ll talk with people who do the work about the role and what it takes.</p>
+        </li>
+      </ol>
+      <div class="cms-process-notes cms-reveal">
+        <p>If you’re selected, our talent team stays with you through the offer and onboarding.</p>
+        <p>Onboarding can take anywhere from a few weeks to a few months, mostly because of the required background check. We’ll keep you posted the whole way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== accommodations: text + usa-summary-box ===== -->
+  <section class="cms-section" aria-labelledby="accom-title">
+    <div class="grid-container cms-split">
+      <div class="cms-split__text cms-reveal">
+        <p class="cms-kicker">Accommodations</p>
+        <h2 id="accom-title" style="font-size:var(--cms-type-2xl);color:var(--cms-color-primary);margin-bottom:var(--cms-spacing-3)">Asking for an accommodation</h2>
+        <p>We want every candidate to be able to show us their best work. When you apply, you can tell us you’d like a disability accommodation.</p>
+        <p>If you move forward, someone from our talent team will reach out to talk through what would help.</p>
+      </div>
+      <div class="usa-summary-box cms-reveal" role="region" aria-labelledby="accom-examples">
+        <h3 class="usa-summary-box__heading" id="accom-examples">For example</h3>
+        <ul>
+          <li>A sign language interpreter or video relay service</li>
+          <li>A video interview instead of a phone call</li>
+          <li>Longer breaks between interviews</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== cms-checklist ===== -->
+  <section class="cms-section cms-section--tint" id="requirements" aria-labelledby="req-title">
+    <div class="grid-container">
+      <div class="cms-section__head cms-reveal">
+        <p class="cms-kicker">Requirements</p>
+        <h2 id="req-title">What you’ll need</h2>
+      </div>
+      <ul class="cms-checklist cms-reveal">
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#015390"/><path d="M9 16.5l4.5 4.5L23 11.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>U.S. citizenship</span></li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#015390"/><path d="M9 16.5l4.5 4.5L23 11.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Being able to work from the location listed for the role. CMS has offices across the country.</span></li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#015390"/><path d="M9 16.5l4.5 4.5L23 11.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Passing a background check and a drug test</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== cms-stat (pay) ===== -->
+  <section class="cms-section" id="pay" aria-labelledby="pay-title">
+    <div class="grid-container">
+      <div class="cms-section__head cms-reveal">
+        <p class="cms-kicker">Pay and benefits</p>
+        <h2 id="pay-title">Pay</h2>
+      </div>
+      <div class="cms-stat cms-reveal">
+        <p class="cms-stat__number">$197,200</p>
+        <div>
+          <p class="cms-stat__label">The top of the General Schedule pay scale in 2026.</p>
+          <p>Federal pay depends on a role’s grade, your experience, and where you work, and it can change from year to year.</p>
+          <p><a href="https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/salary-tables/26Tables/html/DCB.aspx">See the 2026 General Schedule pay tables</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== usa-card-group (benefits) ===== -->
+  <section class="cms-section cms-section--tint" aria-labelledby="ben-title">
+    <div class="grid-container">
+      <div class="cms-section__head cms-reveal">
+        <p class="cms-kicker">Pay and benefits</p>
+        <h2 id="ben-title">Benefits</h2>
+        <p>Federal employees get a wide range of benefits. These are the ones candidates ask about most.</p>
+      </div>
+      <ul class="usa-card-group cms-reveal">
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Health insurance</h3><div class="usa-card__body"><p>Plans vary by where you live. In OPM’s comparison tool, enter the ZIP code where you’ll work, choose “Federal &amp; U.S. Postal Service Employee” as the enrollee type, and “biweekly” as the pay frequency.</p></div><div class="usa-card__footer"><a href="https://www.opm.gov/healthcare-insurance/healthcare/plan-information/compare-plans/">Compare health plans on OPM.gov</a></div></div></li>
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Dental and vision</h3><div class="usa-card__body"><p>Separate dental and vision plans you can add to your coverage.</p></div><div class="usa-card__footer"><a href="https://www.opm.gov/healthcare-insurance/dental-vision/">Dental and vision on OPM.gov</a></div></div></li>
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Thrift Savings Plan</h3><div class="usa-card__body"><p>A retirement savings plan similar to a 401(k), with up to 5% matching.</p></div><div class="usa-card__footer"><a href="https://www.tsp.gov/what-is-contribution/">How TSP contributions work</a></div></div></li>
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Flexible spending accounts</h3><div class="usa-card__body"><p>Set aside pre-tax money for medical, dental, and vision costs, and for child or elder care.</p></div><div class="usa-card__footer"><a href="https://www.fsafeds.gov/">FSAFEDS</a></div></div></li>
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Pension</h3><div class="usa-card__body"><p>The Federal Employees Retirement System (FERS) pays a pension based on your earnings and how long you’ve served.</p></div><div class="usa-card__footer"><a href="https://www.opm.gov/retirement-center/fers-information/">FERS on OPM.gov</a></div></div></li>
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Life insurance</h3><div class="usa-card__body"><p>Basic life insurance, with more coverage available if you want it.</p></div><div class="usa-card__footer"><a href="https://www.opm.gov/healthcare-insurance/life-insurance/">Life insurance on OPM.gov</a></div></div></li>
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Employee Assistance Program</h3><div class="usa-card__body"><p>Free, confidential support with challenges that affect your work, health, or well-being.</p></div></div></li>
+        <li class="usa-card"><div class="usa-card__container"><h3 class="usa-card__heading">Getting to work</h3><div class="usa-card__body"><p>Federal employees can get help with public transit costs, and many CMS locations have on-site parking.</p></div></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== cms-stat-band (time off) ===== -->
+  <section class="cms-section cms-stat-band is-dark" aria-labelledby="time-title">
+    <div class="grid-container">
+      <div class="cms-section__head cms-reveal">
+        <p class="cms-kicker">Pay and benefits</p>
+        <h2 id="time-title">Time off</h2>
+      </div>
+      <ul class="cms-stat-band__list cms-reveal">
+        <li><span class="cms-stat-band__num">13 days</span><span class="cms-stat-band__label">Paid time off a year, if you’re new to federal service</span></li>
+        <li><span class="cms-stat-band__num">13 days</span><span class="cms-stat-band__label">Sick leave a year</span></li>
+        <li><span class="cms-stat-band__num">11 days</span><span class="cms-stat-band__label">Paid federal holidays</span></li>
+        <li><span class="cms-stat-band__num">12 weeks</span><span class="cms-stat-band__label">Paid parental leave, for employees who qualify</span></li>
+      </ul>
+      <p class="cms-stat-band__more"><a href="https://www.opm.gov/policy-data-oversight/pay-leave/leave-administration/fact-sheets/annual-leave/">How annual leave adds up, on OPM.gov</a></p>
+    </div>
+  </section>
+
+  <!-- ===== cms-cta ===== -->
+  <section class="cms-section cms-cta" id="apply" aria-labelledby="cta-title">
+    <div class="grid-container">
+      <div class="cms-cta__inner cms-reveal">
+        <div>
+          <!-- PROPOSED COPY (needs OC review): replaces "Do you feel called? Be part of the change." -->
+          <h2 id="cta-title">Ready to apply? Send us your information.</h2>
+          <p>Our talent team will review it and look for the best fit across CMS.</p>
+        </div>
+        <a class="usa-button usa-button--big" href="https://www.cms.gov/ohtp-join-form?source=join-closing">Send us your information</a>
+      </div>
+      <div class="cms-fineprint">
+        <p>The Centers for Medicare &amp; Medicaid Services is an equal opportunity employer. We consider all qualified applicants without regard to race, color, religion, sex (including pregnancy, sexual orientation, and gender identity), national origin, age, disability, genetic information, or any other protected status.</p>
+        <p>The application form runs on Qualtrics, a third-party service. We’ll only use what you send to consider you for OHTP and CMS roles.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== cms-footer (cms.gov pattern) ===== -->
+<footer class="cms-footer is-dark">
+  <div class="grid-container">
+    <div class="cms-footer__nav">
+      <nav aria-labelledby="f1"><h2 id="f1">CMS &amp; HHS Websites</h2><ul>
+        <li><a href="https://www.medicare.gov/">Medicare.gov</a></li><li><a href="https://www.medicaid.gov/">Medicaid.gov</a></li><li><a href="https://www.insurekidsnow.gov/">InsureKidsNow.gov</a></li><li><a href="https://www.healthcare.gov/">HealthCare.gov</a></li><li><a href="https://www.hhs.gov/">HHS.gov</a></li></ul></nav>
+      <nav aria-labelledby="f2"><h2 id="f2">About CMS</h2><ul>
+        <li><a href="https://www.cms.gov/about-cms">About Us</a></li><li><a href="https://www.cms.gov/about-cms/work-with-us/careers">Careers</a></li><li><a href="https://www.cms.gov/about-cms/contact/newsroom">Newsroom</a></li></ul></nav>
+      <nav aria-labelledby="f3"><h2 id="f3">Tools</h2><ul>
+        <li><a href="https://www.cms.gov/acronyms">Acronyms</a></li><li><a href="https://www.cms.gov/about-cms/contact/directory">Contacts</a></li><li><a href="https://www.cms.gov/glossary">Glossary</a></li></ul></nav>
+      <nav aria-labelledby="f4"><h2 id="f4">Helpful Links</h2><ul>
+        <li><a href="https://www.cms.gov/about-cms/web-policies-important-links/web-policies/privacy">Privacy Policy</a></li><li><a href="https://www.medicare.gov/about-us/plain-writing">Plain Language</a></li><li><a href="https://www.cms.gov/about-cms/web-policies-important-links/accessibility-nondiscrimination-disabilities-notice">Nondiscrimination &amp; Accessibility</a></li><li><a href="https://www.cms.gov/about-cms/information-systems/privacy/vulnerability-disclosure-policy">Vulnerability Disclosure Policy</a></li></ul></nav>
+      <nav aria-labelledby="f5"><h2 id="f5">USA Government Sites</h2><ul>
+        <li><a href="https://www.cms.gov/freedom-information-act-foia-service-center">Freedom of Information Act</a></li><li><a href="https://www.cms.gov/about-cms/web-policies-important-links/no-fear-act">No Fear Act</a></li><li><a href="https://www.oig.hhs.gov">Inspector General</a></li><li><a href="https://www.usa.gov/">USA.gov</a></li></ul></nav>
+    </div>
+    <div class="cms-footer__identity">
+      <a class="cms-footer__hhs" href="https://www.hhs.gov"><img src="assets/hhs-logo.png" alt="U.S. Department of Health and Human Services" width="52" height="52"></a>
+      <div>
+        <p>A federal government website managed and paid for by the U.S. Centers for Medicare &amp; Medicaid Services.</p>
+        <p>7500 Security Boulevard, Baltimore, MD 21244</p>
+      </div>
+      <ul class="cms-footer__social" aria-label="Connect with CMS">
+        <li><a href="https://www.linkedin.com/company/centers-for-medicare-&amp;-medicaid-services/">LinkedIn</a></li>
+        <li><a href="https://www.youtube.com/user/CMSHHSgov">YouTube</a></li>
+        <li><a href="https://www.facebook.com/CMSGov">Facebook</a></li>
+        <li><a href="https://x.com/CMSgov">X</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Progressive-enhancement motion only. Content is fully visible without JS
+   and under prefers-reduced-motion. */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target);} });
+  }, {rootMargin:'0px 0px -10% 0px'});
+  document.querySelectorAll('.cms-reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
